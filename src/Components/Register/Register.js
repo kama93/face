@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+import { useHistory} from 'react-router-dom'
 
-const Register= ({onRouteChange, loadUser})=>{
+const Register= ({loadUser})=>{
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
+
+    const history=useHistory();
     
     const onEmailChange=(event)=> {
         setEmail(event.target.value)
@@ -31,7 +34,7 @@ const Register= ({onRouteChange, loadUser})=>{
         .then(user => {
             if (user.id) {
                 loadUser(user)
-                onRouteChange('home') 
+                history.push('/home')
            } else {
             alert('you need register')
            }

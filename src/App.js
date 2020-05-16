@@ -8,7 +8,13 @@ import Register from './Components/Register/Register';
 import ImageLinkForm from './Components/ImageLinkForm/ImageLinkForm';
 import PhotoPlace from './Components/PhotoPlace/PhotoPlace';
 import Particles from 'react-particles-js';
-
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect
+} from "react-router-dom";
 
 
 
@@ -57,14 +63,6 @@ function App() {
 
         }
     }
-const onRouteChange=(route)=>{
-    if (route==='signin') {
-        window.location.reload()
-        // setIsSignedIn(false)
-    } else if (route==='home'){
-        setIsSignedIn(true)}
-        setRoute(route)
-}
 
     const placeFaceBox=(box)=>{
         setBox(box);
@@ -77,7 +75,14 @@ const loadUser=(data)=>{
                     entries: data.entries,
                     joined: data.joined
                 })
+        if (data.id) {
+            setIsSignedIn(true)
+        } else {
+            setIsSignedIn(false)
+            setImage('')
+
             }
+        }
 
 const onButtonClick=()=>{
     setImage(input);
@@ -119,20 +124,29 @@ const onButtonClick=()=>{
         <Particles className='particles'
                 params={particlesOptions}
                 />
-        <Navigation onRouteChange={onRouteChange} isSignedIn={isSignedIn}/>
-        {route==='home'
-                ?<div>
-                    <Logo/>
-                    <Rank name= {user.name} entries={user.entries}/>
-                    <ImageLinkForm 
-                        onChange={onChange} 
-                        onButtonClick={onButtonClick}/>
-                    <PhotoPlace setImage={image} box={box}/>
-                </div>
-                :(route==='signin'
-                    ?<SignIn loadUser={loadUser} onRouteChange={onRouteChange}/>
-                    :<Register loadUser={loadUser} onRouteChange={onRouteChange}/>)
-        }
+        <Router>
+            <Navigation isSignedIn={isSignedIn} loadUser={loadUser}/>
+            <Switch>
+                <Route path='/home'>
+                    <div>
+                        <Logo/>
+                        <Rank name= {user.name} entries={user.entries}/>
+                        <ImageLinkForm 
+                            onChange={onChange} 
+                            onButtonClick={onButtonClick}/>
+                        <PhotoPlace setImage={image} box={box}/>
+                    </div>
+                </Route>
+                <Route path='/signin'>
+                    <SignIn loadUser={loadUser}/>
+                </Route>
+                <Route path='/register'>
+                    <Register loadUser={loadUser} />
+                </Route>
+                <Redirect from='/' to='/signin' />
+
+            </Switch>
+         </Router>
     </div>
   );
 }

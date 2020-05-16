@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+import { useHistory} from 'react-router-dom'
 
-const SignIn= ({onRouteChange, loadUser})=>{
+const SignIn= ({ loadUser})=>{
     const [signInEmail, setSignInEmail] = useState('');
     const [signInPassword, setSignInPassword] = useState('');
     
+    const history=useHistory();
+
     const onEmailChange=(event)=> {
         setSignInEmail(event.target.value)
     }
@@ -26,7 +29,7 @@ const SignIn= ({onRouteChange, loadUser})=>{
       .then(user => {
         if(user.id){
           loadUser(user);
-          onRouteChange('home');
+          history.push('/home')
         }
         else {
             alert('Wrong password or email')
@@ -70,7 +73,7 @@ const SignIn= ({onRouteChange, loadUser})=>{
                         onClick={onSubmitSignIn}/>
                     </div>
                     <div className="lh-copy mt3">
-                      <p onClick={() => onRouteChange('register')} className="f6 link dim white db">REGISTER</p>
+                      <p onClick={() => history.push('/register')} className="f6 link dim white db">REGISTER</p>
                     </div>
                 </div>
             </main>
