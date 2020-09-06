@@ -16,7 +16,7 @@ const SignIn= ({ loadUser})=>{
     }
     
     const onSubmitSignIn=()=>{
-        fetch('https://salty-castle-65749.herokuapp.com/signin', {
+        fetch('/api/signin', {
             method:'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({

@@ -86,7 +86,7 @@ const loadUser=(data)=>{
 
 const onButtonClick=()=>{
     setImage(input);
-    fetch('https://salty-castle-65749.herokuapp.com/imageurl', {
+    fetch('/api/imageurl', {
                     method:'post',
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({
@@ -96,7 +96,7 @@ const onButtonClick=()=>{
     .then(
         function(response) {
             if(response){
-                fetch('https://salty-castle-65749.herokuapp.com/image', {
+                fetch('/api/image', {
                     method:'put',
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({
