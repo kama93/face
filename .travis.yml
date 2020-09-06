@@ -1,0 +1,16 @@
+language: generic
+
+services:
+  - docker
+
+env:
+  global:
+    secure: cldOCsKnz9ZsTHOYLnVQhi6pAdKhD7kLxJngljmRo01vT9WK9HVkqF0+k4qbQOxih9ltmf6rHe0aKtUykjSnzUMrsP2fff0yiArIoXKblLmQMezktgeZKGQZQPzz+hhcBamDkNHt8n+AQ+FmaJAqrvwFpEcP6WKjR6x+mRqXn4fYpcGPM08fYGJqRVcyMmYXU8ki2l+JLUF5YWtkEyaIGWWPZLeAHIMvbpbsm/05YpvOUKYEz7pLoQc/D5QFEb2X6AS1CMbQT3KLFeboj/V3Nmno+W9KAe4BJmMMqOL0nQh3Fx5XfjPItjoGAQ3RnNncHMsawQPNaW1ejHuKtLh640WRvaAWVhI5X+/87MeqdEMRwYuMiefe8G7rVxryzXzWMPq9xESrslIUyDgRQCol3i3py/IwUxzF+PLDKTj23CaE/2TFAXkRLaGfYJw0dRzHqrDUhsqr2ld/ejLU7f2jKeRFmh16jFrNq/l9wEChc8GIxXldDLDfqV4zwAl58mGJfOaBYKM4BLF7Y3q60qlzti73kW0817CzIuM1RDZLqUMPDm1OobHlS+P8GGjfymfiqeAqxGJe1dIwhkGdApm7P0lPfRcAS7ZYgIk+rnUkq6p255G0sTIKrGmDLlURA0oxFf3Og8qjHzeL1dG1ebdKQ5I5dJAiXA3HVQVcslaEQ5E=
+
+script:
+- docker build -t kama93/face:latest ./front-end
+- docker build -t kama93/face.service:latest ./back-end
+- docker images
+- echo "$DOCKER_TOKEN" | docker login -u kama93 --password-stdin
+- docker push kama93/face:latest
+- docker push kama93/face.service:latest
