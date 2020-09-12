@@ -12,7 +12,6 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
   Redirect
 } from "react-router-dom";
 
@@ -35,7 +34,6 @@ function App() {
     const [input, setInput] = useState('');
     const [image, setImage] = useState('');
     const [box, setBox]= useState({});
-    const [route, setRoute]= useState('signin');
     const [isSignedIn, setIsSignedIn]= useState(false);
     const [user, setUser]=useState({
             id:'',

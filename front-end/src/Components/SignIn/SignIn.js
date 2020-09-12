@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useHistory} from 'react-router-dom'
 
 const SignIn= ({ loadUser})=>{
-    const [signInEmail, setSignInEmail] = useState('');
-    const [signInPassword, setSignInPassword] = useState('');
+    let [signInEmail, setSignInEmail] = useState('');
+    let [signInPassword, setSignInPassword] = useState('');
     
     const history=useHistory();
 
@@ -14,6 +14,12 @@ const SignIn= ({ loadUser})=>{
     const onPasswordChange=(event)=> {
         setSignInPassword(event.target.value)
     }
+
+    const demoLogIn = () => {
+        setSignInEmail(signInEmail='a@gmail.com');
+        setSignInPassword(signInPassword='a');
+        onSubmitSignIn();
+      }
     
     const onSubmitSignIn=()=>{
         fetch('/api/signin', {
@@ -41,6 +47,15 @@ const SignIn= ({ loadUser})=>{
         <article className='br3 ba dark-gray b--white-10 mv4 w-100 w-50-m w-25-1 mw6 shadow-5 center'>
             <main className="pa4 white-80">
                 <div className="measure">
+                <div className="mb4">
+                <label className="db fw6 lh-copy f4 mb1" htmlFor="password">Click here for prepare user</label>
+                <input 
+                className="b ph3 pv2 input-reset ba b--white bg-transparent grow pointer f2 dib" 
+                type="submit" 
+                value="Demo Log In" 
+                style={{color:'white'}}
+                onClick={demoLogIn}/>
+            </div>
                     <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
                         <legend className="f1 fw6 ph0 mh0">Sign In</legend>
                         <div className="mt3">
