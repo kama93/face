@@ -4,7 +4,7 @@ import './ImageLinkForm.css';
 const ImageLinkForm= ({onChange, onButtonClick})=>{
     return(
         <div className='f3'>
-        <p className='center white'>This program will detect face on your picture</p>
+        <p className='center white'>This program will detect face on your picture (add http address)</p>
             <div className='center'>
                 <div className='form center pa4 br3 shadow-5'>
                  <input 
